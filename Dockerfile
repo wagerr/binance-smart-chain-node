@@ -6,7 +6,7 @@ RUN apt-get update -y \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-ENV VERSION=1.1.0-beta
+ENV VERSION=1.1.1-beta
 
 RUN curl --silent "https://api.github.com/repos/binance-chain/bsc/releases/tags/v${VERSION}" | jq -c '.assets[] | select( .browser_download_url | contains("mainnet.zip") or contains("geth_linux")) | .browser_download_url' | xargs -n1 curl -LOJ && \
     unzip mainnet.zip -d / && \
@@ -17,7 +17,7 @@ RUN curl --silent "https://api.github.com/repos/binance-chain/bsc/releases/tags/
     mv geth_linux /usr/local/bin/bsc && \
     chmod +x /usr/local/bin/bsc
 
-ENV BSC_DATADIR=/root/.ethereum
+ENV BSC_DATADIR=/root/.bsc
 
 COPY docker-entrypoint.sh /entrypoint.sh
 
