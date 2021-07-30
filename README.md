@@ -15,7 +15,7 @@ binance-smart-chain-node --syncmode snap --cache 4096
 
 Blockchain data will be stored at `/data/bsc` folder.
 
-`config.toml` will be created if not exists at `/data/bsc/.ethereum/config.toml`
+`config.toml` will be created if not exists at `/data/bsc/.bsc/config.toml`
 
 ## Check sync status
 
@@ -29,14 +29,14 @@ docker logs -f binance-smart-chain-node
 
 * HTTP JSONRPC at port 8545
 * WebSocket at 8546
-* IPC (unix socket) at /data/bsc/.ethereum/geth.ipc
+* IPC (unix socket) at /data/bsc/.bsc/geth.ipc
 
 Test it using [geth_linux](https://github.com/binance-chain/bsc/releases) binary: 
 
 ```
 geth_linux attach http://localhost:8545
 geth_linux attach ws://localhost:8546
-geth_linux attach /data/bsc/.ethereum/geth.ipc
+geth_linux attach /data/bsc/.bsc/geth.ipc
 # Last one needs root privileges
 ```
 
