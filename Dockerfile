@@ -8,8 +8,8 @@ RUN apt-get update -y \
 
 ENV VERSION=1.1.1-beta
 
-RUN curl --silent "https://api.github.com/repos/binance-chain/bsc/releases/tags/v${VERSION}" | jq -c '.assets[] | select( .browser_download_url | contains("mainnet.zip") or contains("geth_linux")) | .browser_download_url' | xargs -n1 curl -LOJ && \
-    unzip mainnet.zip -d / && \
+RUN curl --silent "https://api.github.com/repos/binance-chain/bsc/releases/tags/v${VERSION}" | jq -c '.assets[] | select( .browser_download_url | contains("testnet.zip") or contains("geth_linux")) | .browser_download_url' | xargs -n1 curl -LOJ && \
+    unzip testnet.zip -d / && \
     sed -i 's/^HTTPHost.*/HTTPHost = "0.0.0.0"/' /config.toml && \
     sed -i '/^WSPort.*/a WSHost = "0.0.0.0"' /config.toml && \
     sed -i 's/^HTTPVirtualHosts.*/HTTPVirtualHosts = ["*"]/' /config.toml && \
@@ -31,9 +31,9 @@ EXPOSE 30311/tcp
 EXPOSE 6060/tcp
 
 # HTTP based JSON RPC API
-EXPOSE 8545/tcp
+EXPOSE 8575/tcp
 # WebSocket based JSON RPC API
-EXPOSE 8546/tcp
+EXPOSE 8576/tcp
 
 ENTRYPOINT ["/entrypoint.sh"]
 
